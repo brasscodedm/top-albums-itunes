@@ -1,0 +1,142 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:testing-library/react",
+    "prettier"
+  ],
+  "plugins": ["react", "jest", "jest-dom", "testing-library"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "jest/globals": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "project": "./tsconfig.json"
+  },
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-console": "off",
+    "no-debugger": "warn",
+    "require-yield": "warn",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/valid-expect": "off",
+    "jest/valid-expect-in-promise": "off",
+    "jest/expect-expect": "off",
+    "no-useless-return": "warn",
+    "no-return-await": "warn",
+    "no-with": "error",
+    "require-await": "warn",
+    "yoda": "error",
+    "no-new": "error",
+    "no-loop-func": "error",
+    "array-callback-return": "error",
+    "dot-notation": "error",
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "no-alert": "warn",
+    "prefer-rest-params": "error",
+    "prefer-template": "warn",
+    "prefer-spread": "warn",
+    "prefer-destructuring": "warn",
+    "prefer-const": "warn",
+    "prefer-arrow-callback": "warn",
+    "no-var": "error",
+    "no-duplicate-imports": "warn",
+    "no-useless-rename": "warn",
+    "object-shorthand": "warn",
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "(useDeferredLayoutEffect)" // regex
+      }
+    ],
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": ["function"],
+        "format": ["PascalCase", "camelCase"]
+      },
+      {
+        "selector": "variable",
+        "format": ["PascalCase", "camelCase", "UPPER_CASE"]
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "typeParameter",
+        "format": ["PascalCase"],
+        "prefix": ["T"]
+      },
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": false
+        }
+      },
+      {
+        "selector": "variable",
+        "types": ["boolean"],
+        "format": ["PascalCase"],
+        "prefix": ["is", "are", "should", "has", "do", "can", "did", "will"]
+      },
+      {
+        "selector": "enumMember",
+        "format": ["UPPER_CASE"]
+      },
+      {
+        "selector": [
+          "classProperty",
+          "objectLiteralProperty",
+          "typeProperty",
+          "classMethod",
+          "objectLiteralMethod",
+          "typeMethod",
+          "accessor",
+          "enumMember"
+        ],
+        "format": null,
+        "modifiers": ["requiresQuotes"]
+      }
+    ]
+  },
+  "globals": {
+    "console": false,
+    "process": false,
+    "IS_PRODUCTION": false,
+    "IS_DEVELOPMENT": false,
+    "check": true,
+    "gen": true
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ]
+}
