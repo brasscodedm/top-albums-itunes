@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Feed } from '../types/Feed';
 
-export const getTopAlbums = ({ limit = 100 }: { limit: number }): Promise<AxiosResponse<Feed>> =>
+type Props = { limit?: number };
+
+export const getTopAlbums = ({ limit = 100 }: Props): Promise<AxiosResponse<{ feed: Feed }>> =>
   axios.get(`https://itunes.apple.com/us/rss/topalbums/limit=${limit}/json`);

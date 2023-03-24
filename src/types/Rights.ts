@@ -1,1 +1,3 @@
-export type Rights = string;
+export type Rights = {
+  label: string;
+};

@@ -1,10 +1,13 @@
 import { ThemeProvider } from './theme';
 import { Albums } from './pages/Albums/Albums';
+import { RecoilRoot } from 'recoil';
 
 export const App = () => {
   return (
     <ThemeProvider>
-      <Albums />
+      <RecoilRoot>
+        <Albums />
+      </RecoilRoot>
     </ThemeProvider>
   );
 };
