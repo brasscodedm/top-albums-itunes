@@ -1,11 +1,3 @@
-import './App.css'
-
-export const App = () =>  {
-
-  return (
-    <div className="App">
-      init project
-    </div>
-  )
-}
-
+export const App = () => {
+  return <div>init project</div>;
+};
