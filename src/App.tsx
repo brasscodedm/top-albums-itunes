@@ -1,3 +1,10 @@
+import { ThemeProvider } from './theme';
+import { Albums } from './pages/Albums/Albums';
+
 export const App = () => {
-  return <div>init project</div>;
+  return (
+    <ThemeProvider>
+      <Albums />
+    </ThemeProvider>
+  );
 };
