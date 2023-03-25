@@ -17,7 +17,6 @@ import {
   TablePagination,
   Paper,
 } from '@mui/material';
-import { useEffect } from 'react';
 import { topAlbumsQuery } from './selectors';
 import { useRecoilValue } from 'recoil';
 import { Entry } from '../../types/Entry';
