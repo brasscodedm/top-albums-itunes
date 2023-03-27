@@ -20,15 +20,29 @@ import {
 import { topAlbumsQuery } from './selectors';
 import { useRecoilValue } from 'recoil';
 import { Entry } from '../../types/Entry';
+import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ListHead } from '../../components/List/ListHead/ListHead';
+
+const TABLE_HEAD = [
+  { id: 'name', label: 'Name', alignRight: false },
+  { id: 'company', label: 'Company', alignRight: false },
+  { id: 'role', label: 'Role', alignRight: false },
+  { id: 'isVerified', label: 'Verified', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
+  { id: '' },
+];
 
 export const Albums = () => {
   const topAlbums = useRecoilValue(topAlbumsQuery);
-  const count = 50; // TODO dynamic
+  const [order, setOrder] = useState<'asc' | 'desc'>('asc');
+  const [orderBy, setOrderBy] = useState('name');
+  const [selected, setSelected] = useState<string[]>([]);
 
+  const count = 50; // TODO dynamic
   const filteredAlbums: Entry[] = topAlbums;
   const emptyRows = 2;
   const isNotFound = true;
-  const selected = '';
+
   const filterName = 'TOmelk';
 
   const handleChangePage = (e: any) => {
@@ -47,6 +61,22 @@ export const Albums = () => {
     console.log('open menu');
   };
 
+  const handleRequestSort = (_e: MouseEvent, property: string) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event);
+    if (event.target.checked) {
+      const newSelected = topAlbums.map((n) => n.id);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
+  };
+
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -62,15 +92,15 @@ export const Albums = () => {
 
         <TableContainer sx={{ minWidth: 800 }}>
           <Table>
-            {/*<UserListHead*/}
-            {/*  order={order}*/}
-            {/*  orderBy={orderBy}*/}
-            {/*  headLabel={TABLE_HEAD}*/}
-            {/*  rowCount={USERLIST.length}*/}
-            {/*  numSelected={selected.length}*/}
-            {/*  onRequestSort={handleRequestSort}*/}
-            {/*  onSelectAllClick={handleSelectAllClick}*/}
-            {/*/>*/}
+            <ListHead
+              order={order}
+              orderBy={orderBy}
+              headLabel={TABLE_HEAD}
+              rowCount={topAlbums.length}
+              numSelected={selected.length}
+              onRequestSort={handleRequestSort}
+              onSelectAllClick={handleSelectAllClick}
+            />
             <TableBody>
               {filteredAlbums.map((row: Entry) => {
                 const name = row.title.label;
@@ -81,7 +111,7 @@ export const Albums = () => {
                 const fullPrice = row['im:price'].label;
                 console.log(row);
 
-                const selectedUser = selected.indexOf(name) !== -1;
+                const selectedUser = selected.indexOf(id) !== -1;
 
                 return (
                   <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
