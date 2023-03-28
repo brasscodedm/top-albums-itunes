@@ -1,7 +1,4 @@
 import { alpha } from '@mui/material/styles';
-import { PaletteOptions } from '@mui/material/styles/createPalette';
-
-// ----------------------------------------------------------------------
 
 // SETUP COLORS
 const GREY = {

@@ -1,6 +1,7 @@
-import { ThemeProvider } from './theme';
-import { Albums } from './pages/Albums/Albums';
 import { RecoilRoot } from 'recoil';
+
+import { Albums } from './pages/Albums/Albums';
+import { ThemeProvider } from './theme';
 
 export const App = () => {
   return (

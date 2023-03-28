@@ -1,8 +1,8 @@
+import { Box, Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import { ChangeEvent, MouseEvent } from 'react';
+
 // @mui
-import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
 import { boxStyles } from './ListHead.style';
-// ----------------------------------------------------------------------
 
 type Props = {
   order: 'asc' | 'desc';

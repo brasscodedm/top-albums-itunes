@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+
 import { Feed } from '../types/Feed';
 
 type Props = { limit?: number };

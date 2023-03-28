@@ -1,16 +1,12 @@
-import PropTypes from 'prop-types';
-import { ReactElement, useMemo } from 'react';
-// @mui
 import { createTheme, CssBaseline } from '@mui/material';
-import { ThemeProvider as MUIThemeProvider, StyledEngineProvider } from '@mui/material/styles';
-//
+import { StyledEngineProvider, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
+import { ReactElement, useMemo } from 'react';
+
+import GlobalStyles from './globalStyles';
+import componentsOverride from './overrides';
 import palette from './palette';
 import shadows from './shadows';
 import typography from './typography';
-import GlobalStyles from './globalStyles';
-import componentsOverride from './overrides';
-
-// ----------------------------------------------------------------------
 
 export const ThemeProvider = ({ children }: { children: ReactElement }) => {
   const themeOptions = useMemo(

@@ -1,10 +1,10 @@
 // @mui
 import { alpha } from '@mui/material/styles';
+
 //
 import palette from './palette';
 
-// ----------------------------------------------------------------------
-
+// eslint-disable-next-line prefer-destructuring
 const color = palette.grey[500];
 
 export default function customShadows() {

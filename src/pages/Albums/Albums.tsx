@@ -1,27 +1,27 @@
 import {
+  Avatar,
   Button,
   Card,
+  Checkbox,
   Container,
-  Grid,
   IconButton,
-  Input,
+  Paper,
   Stack,
   Table,
+  TableBody,
   TableCell,
   TableContainer,
+  TablePagination,
   TableRow,
   Typography,
-  TableBody,
-  Checkbox,
-  Avatar,
-  TablePagination,
-  Paper,
 } from '@mui/material';
-import { topAlbumsQuery } from './selectors';
-import { useRecoilValue } from 'recoil';
-import { Entry } from '../../types/Entry';
 import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+
 import { ListHead } from '../../components/List/ListHead/ListHead';
+import { Entry } from '../../types/Entry';
+
+import { topAlbumsQuery } from './selectors';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
@@ -68,7 +68,6 @@ export const Albums = () => {
   };
 
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event);
     if (event.target.checked) {
       const newSelected = topAlbums.map((n) => n.id);
       setSelected(newSelected);
@@ -104,19 +103,19 @@ export const Albums = () => {
             <TableBody>
               {filteredAlbums.map((row: Entry) => {
                 const name = row.title.label;
-                const id = row.id;
+                const { id } = row;
                 const avatarUrl = row['im:image'][0].label;
                 const company = row['im:artist'].label;
                 const category = row.category.attributes.label;
                 const fullPrice = row['im:price'].label;
                 console.log(row);
 
-                const selectedUser = selected.indexOf(id) !== -1;
+                const isSelectedUser = selected.indexOf(id) !== -1;
 
                 return (
-                  <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
+                  <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={isSelectedUser}>
                     <TableCell padding="checkbox">
-                      <Checkbox checked={selectedUser} onChange={(event) => handleClick(event, name)} />
+                      <Checkbox checked={isSelectedUser} onChange={(event) => handleClick(event, name)} />
                     </TableCell>
 
                     <TableCell component="th" scope="row" padding="none">

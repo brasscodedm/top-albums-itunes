@@ -1,6 +1,5 @@
-// ----------------------------------------------------------------------
-
 import { Theme } from '@mui/material/styles';
+
 import customShadows from '../customShadows';
 
 export default function Card(theme: Theme) {
