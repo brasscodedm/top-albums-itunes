@@ -2,7 +2,7 @@ import { Box, Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@
 import { ChangeEvent, MouseEvent } from 'react';
 
 // @mui
-import { boxStyles } from './ListHead.style';
+import { boxStyles } from './ListHead.styles';
 
 type HeadLabel = { id: string; label: string; alignRight: boolean };
 

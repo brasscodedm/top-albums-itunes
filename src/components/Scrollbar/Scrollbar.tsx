@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { CSSProperties, memo, ReactElement } from 'react';
 
-import { StyledRootScrollbar, StyledScrollbar } from './Scrollbar.style';
+import { StyledRootScrollbar, StyledScrollbar } from './Scrollbar.styles';
 
 type Props = {
   children: ReactElement;

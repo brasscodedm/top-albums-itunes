@@ -19,3 +19,7 @@ body {
   min-height: 100vh;
 }
 
+/* hack for library until fixed */
+.simplebar-placeholder {
+  display: none;
+}

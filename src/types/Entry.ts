@@ -1,4 +1,3 @@
-import { Artist } from './Artist';
 import { Category } from './Category';
 import { ContentType } from './ContentType';
 import { Id } from './Id';
@@ -19,7 +18,7 @@ export type Entry = {
   title: Label;
   link: Link;
   id: Id;
-  'im:artist': Artist;
+  'im:artist': Label;
   category: Category;
   'im:releaseDate': ReleaseDate;
 };

@@ -2,7 +2,7 @@ import { filter } from 'lodash';
 
 import { Entry } from '../types/Entry';
 
-export const applySortFilter = <T>(array: T[], comparator: any, query: string) => {
+export const applySortFilter = (array: Entry[], comparator: any, query: string): Entry[] => {
   const stabilizedThis = array.map((el, index) => [el, index] as const);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
