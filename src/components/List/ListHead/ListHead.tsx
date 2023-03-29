@@ -4,11 +4,13 @@ import { ChangeEvent, MouseEvent } from 'react';
 // @mui
 import { boxStyles } from './ListHead.style';
 
+type HeadLabel = { id: string; label: string; alignRight: boolean };
+
 type Props = {
   order: 'asc' | 'desc';
   orderBy: string;
   rowCount: number;
-  headLabel: any[];
+  headLabel: HeadLabel[];
   numSelected: number;
   onRequestSort: (event: MouseEvent, property: string) => void;
   onSelectAllClick: (event: ChangeEvent<HTMLInputElement>) => void;
