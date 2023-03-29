@@ -19,6 +19,7 @@ import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { ListHead } from '../../components/List/ListHead/ListHead';
+import { Toolbar } from '../../components/List/ToolBar/Toolbar';
 import { Entry } from '../../types/Entry';
 
 import { topAlbumsQuery } from './selectors';
@@ -34,16 +35,17 @@ const TABLE_HEAD = [
 
 export const Albums = () => {
   const topAlbums = useRecoilValue(topAlbumsQuery);
+  const [page, setPage] = useState(0);
+
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [selected, setSelected] = useState<string[]>([]);
+  const [filterName, setFilterName] = useState('');
 
   const count = 50; // TODO dynamic
   const filteredAlbums: Entry[] = topAlbums;
   const emptyRows = 2;
   const isNotFound = true;
-
-  const filterName = 'TOmelk';
 
   const handleChangePage = (e: any) => {
     console.log(e);
@@ -76,6 +78,11 @@ export const Albums = () => {
     setSelected([]);
   };
 
+  const handleFilterByName = (e: ChangeEvent<HTMLInputElement>) => {
+    setPage(0);
+    setFilterName(e.target.value);
+  };
+
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -87,7 +94,7 @@ export const Albums = () => {
       </Stack>
 
       <Card>
-        {/*<UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />*/}
+        <Toolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
         <TableContainer sx={{ minWidth: 800 }}>
           <Table>
@@ -177,7 +184,7 @@ export const Albums = () => {
           component="div"
           count={5}
           rowsPerPage={2}
-          page={3}
+          page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
