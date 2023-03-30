@@ -5,7 +5,9 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "plugin:import/typescript",
-    "prettier"
+    "prettier",
+    "eslint:recommended",
+    "eslint-config-prettier"
   ],
   "plugins": ["import", "react", "jest", "eslint-comments"],
   "env": {

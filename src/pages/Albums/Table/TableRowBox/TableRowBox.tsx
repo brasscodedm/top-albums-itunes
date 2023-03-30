@@ -1,4 +1,4 @@
-import { Avatar, Box, Checkbox, Stack, TableCell, TableRow, Typography } from '@mui/material';
+import { Avatar, Box, Button, Checkbox, Stack, TableCell, TableRow, Typography } from '@mui/material';
 
 import { Iconify } from '../../../../components/Iconify/Iconify';
 import { Entry } from '../../../../types/Entry';
@@ -15,9 +15,9 @@ export const TableRowBox = ({ row, isSelected, isFavourite, onHandleClick, onHan
   const { id, title, image: avatarUrl, artist, category, price: fullPrice } = row;
 
   return (
-    <TableRow hover key={id + title} tabIndex={-1} role="checkbox" selected={isSelected}>
+    <TableRow hover tabIndex={-1} role="checkbox" selected={isSelected} data-testid="table-row">
       <TableCell padding="checkbox">
-        <Checkbox checked={isSelected} onChange={() => onHandleClick(id)} />
+        <Checkbox checked={isSelected} onChange={() => onHandleClick(id)} data-testid="table-row-checkbox" />
       </TableCell>
 
       <TableCell component="th" scope="row" padding="none">
@@ -33,12 +33,12 @@ export const TableRowBox = ({ row, isSelected, isFavourite, onHandleClick, onHan
 
       <TableCell align="left">{fullPrice}</TableCell>
       <TableCell>
-        <Box onClick={() => onHandleFavourite(id)}>
+        <Button onClick={() => onHandleFavourite(id)} data-testid="favourite-button">
           <Iconify
             icon="typcn:star"
-            sx={{ color: isFavourite ? 'text.disabled' : 'warning.main', width: 30, height: 30 }}
+            sx={{ color: isFavourite ? 'warning.main' : 'text.disabled', width: 30, height: 30 }}
           />
-        </Box>
+        </Button>
       </TableCell>
     </TableRow>
   );

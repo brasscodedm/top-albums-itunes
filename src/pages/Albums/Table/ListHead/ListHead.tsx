@@ -37,6 +37,7 @@ export const ListHead = ({
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
+            data-testid="select-all-checkbox"
           />
         </TableCell>
         {headLabel.map((headCell) => (

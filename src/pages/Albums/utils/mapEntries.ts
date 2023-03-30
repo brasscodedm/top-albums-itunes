@@ -1,8 +1,6 @@
-import { isArray } from 'lodash';
+import { Entry, EntryApi } from '../../../types/Entry';
 
-import { Entry, EntryApi } from '../../types/Entry';
-
-export const mapEntriesApi = (entries: EntryApi[]): Entry[] =>
+export const mapEntries = (entries: EntryApi[]): Entry[] =>
   entries.map((entry) => ({
     name: entry['im:name'].label,
     title: entry.title.label,
@@ -13,5 +11,3 @@ export const mapEntriesApi = (entries: EntryApi[]): Entry[] =>
     artist: entry['im:artist'].label,
     category: entry.category.attributes.label,
   }));
-
-

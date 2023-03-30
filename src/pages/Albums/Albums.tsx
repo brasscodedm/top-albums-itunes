@@ -2,7 +2,6 @@ import { Card, Container, Table, TableBody, TableContainer, TablePagination } fr
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { ListHead } from '../../components/List/ListHead/ListHead';
 import { Toolbar } from '../../components/List/ToolBar/Toolbar';
 import { Scrollbar } from '../../components/Scrollbar/Scrollbar';
 import { getStoredData, updateStoredData } from '../../service/storage-service';
@@ -12,9 +11,11 @@ import { getComparator } from '../../utils/getComparatar';
 
 import { EmptyRowsBox } from './Table/EmptyRowsBox/EmptyRowsBox';
 import { HeaderBox } from './Table/HeaderBox/HeaderBox';
+import { ListHead } from './Table/ListHead/ListHead';
 import { NoResultsBox } from './Table/NoResultsBox';
 import { TableRowBox } from './Table/TableRowBox/TableRowBox';
 import { topAlbumsQuery } from './selectors';
+import { handleSelectedList } from './utils';
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
@@ -52,36 +53,15 @@ export const Albums = () => {
   };
 
   const handleClick = (id: string) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected: string[] = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-    }
+    const newSelected = handleSelectedList(selected, id);
     setSelected(newSelected);
   };
 
   const handleFavourite = (id: string) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected: string[] = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-    }
-    console.log(newSelected);
+    const newFavourites = handleSelectedList(favourites, id);
 
-    updateStoredData(favouritesKey, newSelected);
-    setFavourites(newSelected);
+    updateStoredData(favouritesKey, newFavourites);
+    setFavourites(newFavourites);
   };
 
   const handleRequestSort = (_e: MouseEvent, property: string) => {
@@ -136,6 +116,7 @@ export const Albums = () => {
                         isFavourite={isFavouriteAlbum}
                         onHandleClick={handleClick}
                         onHandleFavourite={handleFavourite}
+                        key={row.id}
                       />
                     );
                   })}
