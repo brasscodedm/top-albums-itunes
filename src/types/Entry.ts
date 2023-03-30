@@ -8,7 +8,7 @@ import { Price } from './Price';
 import { ReleaseDate } from './RelaseDate';
 import { Rights } from './Rights';
 
-export type Entry = {
+export type EntryApi = {
   'im:name': Label;
   'im:image': Image[];
   'im:itemCount': Label;
@@ -21,4 +21,15 @@ export type Entry = {
   'im:artist': Label;
   category: Category;
   'im:releaseDate': ReleaseDate;
+};
+
+export type Entry = {
+  name: string;
+  image: string;
+  price: string;
+  title: string;
+  link: string;
+  id: string;
+  artist: string;
+  category: string;
 };

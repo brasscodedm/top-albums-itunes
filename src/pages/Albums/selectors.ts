@@ -1,11 +1,14 @@
-import { selector } from 'recoil';
+import { selectorFamily } from 'recoil';
 
 import { getTopAlbums } from '../../api/itunes.service';
+import { Entry } from '../../types/Entry';
 
-export const topAlbumsQuery = selector({
+import { mapEntriesApi } from './utils';
+
+export const topAlbumsQuery = selectorFamily<Entry[], number>({
   key: 'TopAlbums',
-  get: async () => {
-    const response = await getTopAlbums({ limit: 20 });
-    return response.data.feed.entry;
+  get: (limit) => async () => {
+    const response = await getTopAlbums({ limit });
+    return mapEntriesApi(response.data.feed.entry);
   },
 });

@@ -1,8 +1,6 @@
 import { filter } from 'lodash';
 
-import { Entry } from '../types/Entry';
-
-export const applySortFilter = (array: Entry[], comparator: any, query: string): Entry[] => {
+export const applySortFilter = <T extends Record<string, string>>(array: T[], comparator: any, query: string): T[] => {
   const stabilizedThis = array.map((el, index) => [el, index] as const);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -10,7 +8,7 @@ export const applySortFilter = (array: Entry[], comparator: any, query: string):
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user: Entry) => _user['im:name'].label.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user: T) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 };

@@ -1,5 +1,5 @@
 import { Author } from './Author';
-import { Entry } from './Entry';
+import { EntryApi } from './Entry';
 import { Id } from './Id';
 import { Link } from './Link';
 import { Rights } from './Rights';
@@ -8,7 +8,7 @@ import { Updated } from './Updated';
 
 export type Feed = {
   author: Author;
-  entry: Entry[];
+  entry: EntryApi[];
   id: Id;
   link: Link[];
   rights: Rights;
