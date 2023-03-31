@@ -1,20 +1,14 @@
-import { Card, Container, Table, TableBody, TableContainer, TablePagination } from '@mui/material';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { Card, Container, Table, TableContainer, TablePagination } from '@mui/material';
+import { ChangeEvent, MouseEvent, Suspense, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { Toolbar } from '../../components/List/ToolBar/Toolbar';
-import { Scrollbar } from '../../components/Scrollbar/Scrollbar';
-import { getStoredData, updateStoredData } from '../../service/storage-service';
-import { Entry } from '../../types/Entry';
-import { applySortFilter } from '../../utils/albumsUtils';
-import { getComparator } from '../../utils/getComparatar';
+import { Toolbar } from '@/components/List/ToolBar/Toolbar';
+import { Scrollbar } from '@/components/Scrollbar/Scrollbar';
+import { getStoredData, updateStoredData } from '@/service/storage-service';
+import { Entry } from '@/types/Entry';
 
-import { EmptyRowsBox } from './Table/EmptyRowsBox/EmptyRowsBox';
-import { HeaderBox } from './Table/HeaderBox/HeaderBox';
-import { ListHead } from './Table/ListHead/ListHead';
-import { NoResultsBox } from './Table/NoResultsBox';
-import { TableRowBox } from './Table/TableRowBox/TableRowBox';
-import { topAlbumsQuery } from './selectors';
+import { BodyContent, HeaderBox, ListHead } from '@/pages/Albums/Table';
+import { topAlbumsQuery } from './store/selectors';
 import { handleSelectedList } from './utils';
 
 const TABLE_HEAD = [
@@ -26,22 +20,17 @@ const TABLE_HEAD = [
 
 const favouritesKey = 'FAVOURITES';
 
-export const Albums = () => {
+export const AlbumsContent = () => {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState<keyof Entry>('name');
   const [selected, setSelected] = useState<string[]>([]);
   const [favourites, setFavourites] = useState<string[]>(() => getStoredData(favouritesKey) || []);
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const count = 53; // FEAT dynamic
-  const topAlbums = useRecoilValue(topAlbumsQuery(count));
-
-  const filteredAlbums = applySortFilter(topAlbums, getComparator(order, orderBy), filterName);
-
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredAlbums.length) : 0;
+  const topAlbums = useRecoilValue(topAlbumsQuery);
 
   const handleChangePage = (newPage: number) => {
     setPage(newPage);
@@ -67,7 +56,7 @@ export const Albums = () => {
   const handleRequestSort = (_e: MouseEvent, property: string) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    setOrderBy(property as keyof Entry);
   };
 
   const handleSelectAllClick = ({ target: { checked } }: ChangeEvent<HTMLInputElement>) => {
@@ -84,12 +73,10 @@ export const Albums = () => {
     setFilterName(e.target.value);
   };
 
-  const isNotFound = !filteredAlbums.length && !!filterName;
-
   return (
     <>
       <Container>
-        <HeaderBox count={count} />
+        <HeaderBox />
         <Card>
           <Toolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
           <Scrollbar>
@@ -99,38 +86,29 @@ export const Albums = () => {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={topAlbums.length}
+                  rowCount={10}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
-                <TableBody>
-                  {filteredAlbums.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: Entry) => {
-                    const isSelectedAlbum = selected.indexOf(row.id) !== -1;
-                    const isFavouriteAlbum = favourites.indexOf(row.id) !== -1;
-
-                    return (
-                      <TableRowBox
-                        row={row}
-                        isSelected={isSelectedAlbum}
-                        isFavourite={isFavouriteAlbum}
-                        onHandleClick={handleClick}
-                        onHandleFavourite={handleFavourite}
-                        key={row.id}
-                      />
-                    );
-                  })}
-                  {emptyRows > 0 && <EmptyRowsBox emptyRows={emptyRows} />}
-                </TableBody>
-
-                {isNotFound && <NoResultsBox filterName={filterName} />}
+                <BodyContent
+                  order={order}
+                  orderBy={orderBy}
+                  filterName={filterName}
+                  page={page}
+                  rowsPerPage={rowsPerPage}
+                  selected={selected}
+                  favourites={favourites}
+                  handleClick={handleClick}
+                  handleFavourite={handleFavourite}
+                />
               </Table>
             </TableContainer>
           </Scrollbar>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, 50]}
             component="div"
-            count={topAlbums.length}
+            count={10}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={(_, page) => handleChangePage(page)}
@@ -139,5 +117,13 @@ export const Albums = () => {
         </Card>
       </Container>
     </>
+  );
+};
+
+export const Albums = () => {
+  return (
+    <Suspense>
+      <AlbumsContent />
+    </Suspense>
   );
 };

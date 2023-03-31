@@ -1,6 +1,10 @@
 import { filter } from 'lodash';
 
-export const applySortFilter = <T extends Record<string, string>>(array: T[], comparator: any, query: string): T[] => {
+export const applySortFilter = <T extends Record<string, string>>(
+  array: T[],
+  comparator: (a: T, b: T) => number,
+  query: string
+): T[] => {
   const stabilizedThis = array.map((el, index) => [el, index] as const);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);

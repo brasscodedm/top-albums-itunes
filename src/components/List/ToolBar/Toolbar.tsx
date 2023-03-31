@@ -1,7 +1,7 @@
 import { IconButton, InputAdornment, Tooltip, Typography } from '@mui/material';
 import { ChangeEvent } from 'react';
 
-import { Iconify } from '../../Iconify/Iconify';
+import { Iconify } from '@/components/Iconify/Iconify';
 
 import { StyledRoot, StyledSearch } from './Toolbar.styles';
 
@@ -26,9 +26,10 @@ export const Toolbar = ({ numSelected, filterName, onFilterName }: Props) => (
       </Typography>
     ) : (
       <StyledSearch
+        aria-label="toolbar-search"
         value={filterName}
         onChange={onFilterName}
-        placeholder="Search user..."
+        placeholder="Search albums..."
         startAdornment={
           <InputAdornment position="start">
             <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />

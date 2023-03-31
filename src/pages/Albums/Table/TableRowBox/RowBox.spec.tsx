@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Entry } from '../../../../types/Entry';
+import { Entry } from '@/types/Entry';
 
 import { TableRowBox } from './TableRowBox';
 

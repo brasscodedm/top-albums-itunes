@@ -13,6 +13,7 @@ const config: Config.InitialOptions = {
   transformIgnorePatterns: ['node_modules/(?!(ol)/.*)'],
   moduleNameMapper: {
     '\\.svg': '<rootDir>/__mocks__/svgrMock.ts',
+    '@/(.*)': '<rootDir>/src/$1',
   },
 };
 

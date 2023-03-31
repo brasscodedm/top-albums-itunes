@@ -1,4 +1,4 @@
-import { Entry, EntryApi } from '../../../types/Entry';
+import { Entry, EntryApi } from '@/types/Entry';
 
 export const mapEntries = (entries: EntryApi[]): Entry[] =>
   entries.map((entry) => ({

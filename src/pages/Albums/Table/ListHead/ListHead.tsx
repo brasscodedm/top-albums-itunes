@@ -1,7 +1,6 @@
 import { Box, Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 import { ChangeEvent, MouseEvent } from 'react';
 
-// @mui
 import { boxStyles } from './ListHead.styles';
 
 type HeadLabel = { id: string; label: string; alignRight: boolean };

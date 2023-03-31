@@ -1,7 +1,7 @@
-import { Avatar, Box, Button, Checkbox, Stack, TableCell, TableRow, Typography } from '@mui/material';
+import { Avatar, Button, Checkbox, Stack, TableCell, TableRow, Typography } from '@mui/material';
 
-import { Iconify } from '../../../../components/Iconify/Iconify';
-import { Entry } from '../../../../types/Entry';
+import { Iconify } from '@/components/Iconify/Iconify';
+import { Entry } from '@/types/Entry';
 
 type Props = {
   row: Entry;

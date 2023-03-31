@@ -4,12 +4,11 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "plugin:import/typescript",
     "prettier",
     "eslint:recommended",
     "eslint-config-prettier"
   ],
-  "plugins": ["import", "react", "jest", "eslint-comments"],
+  "plugins": ["react", "jest", "eslint-comments"],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -120,8 +119,7 @@
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-empty-function": "off",
     "eslint-comments/disable-enable-pair": ["error", { "allowWholeFile": true }],
-    "eslint-comments/no-unused-disable": "error",
-    "import/order": ["error", { "newlines-between": "always", "alphabetize": { "order": "asc" } }],
+    "eslint-comments/no-unused-disable": "error"
   },
   "globals": {
     "console": false,
